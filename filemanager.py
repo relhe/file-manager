@@ -45,3 +45,21 @@ class FileManager:
         else:
             for filename in self.files:
                 print(filename)
+
+    def create_new_directory(self, dirname):
+        try:
+            os.mkdir(self.path + "/" + dirname)
+        except OSError:
+            print(f"The {dirname} directory already exists.")
+
+    def create_leaf_directory(self, dirname):
+        try:
+            os.makedirs(self.path + "/" + dirname)
+        except OSError:
+            print(f"The {dirname} directory already exists.")
+
+    def create_new_file(self, filename):
+        try:
+            open(self.path + "/" + filename, "w")
+        except OSError:
+            print("The file already exists.")
