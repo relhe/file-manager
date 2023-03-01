@@ -13,6 +13,7 @@ develop-eggs/
 dist/
 downloads/
 eggs/
+test/
 .eggs/
 lib/
 lib64/
@@ -42,6 +43,7 @@ htmlcov/
 .tox/
 .nox/
 .coverage
+.vscode/
 .coverage.*
 .cache
 nosetests.xml
