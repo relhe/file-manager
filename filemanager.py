@@ -1,4 +1,5 @@
 import os
+import shutil
 
 class FileManager:
     def __init__(self, path = "./"):
@@ -20,3 +21,27 @@ class FileManager:
         self.files.sort()
         for filename in self.files:
             print(filename)
+
+    def reverse_sort_all_files(self):
+        self.files.sort()
+        self.files.reverse()
+        for filename in self.files:
+            print(filename)
+
+    def list_first_ten_files(self):
+        if len(self.files) > 10:
+            files = self.files[0:10]
+            for filename in files:
+                print(filename)
+        else:
+            for filename in self.files:
+                print(filename)
+
+    def list_last_ten_files(self):
+        if len(self.files) > 10:
+            files = self.files[-10:]
+            for filename in files:
+                print(filename)
+        else:
+            for filename in self.files:
+                print(filename)
