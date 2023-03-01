@@ -71,3 +71,24 @@ class FileManager:
         except OSError:
             print("The file already exists.")
 
+    def remove_file_from_folder(self, filename):
+        try:
+            os.remove(self.path + filename)
+        except FileNotFoundError:
+            print(f"The {filename} file does not exist.")
+        except OSError:
+            print("The file is a directory.")
+
+    def remove_empty_directory(self, dirname):
+        try:
+            os.rmdir(self.path + dirname)
+        except FileNotFoundError:
+            print(f"The {dirname} directory does not exist.")
+
+    def remove_directory(self, dirname):
+        try:
+            shutil.rmtree(self.path + dirname)
+        except FileNotFoundError:
+            print(f"The {dirname} directory does not exist.")
+
+    
