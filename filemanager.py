@@ -91,4 +91,24 @@ class FileManager:
         except FileNotFoundError:
             print(f"The {dirname} directory does not exist.")
 
+    def move_to_another_directory(self, filename, new_path):
+        # verify if the new_path exists if not it creates it + the file to be moved
+        try:
+            shutil.move(self.path + filename, new_path)
+        except FileNotFoundError:
+            print(f"The {filename} file does not exist.")
+        except OSError:
+            print("The file already exists.")
+
+    def move_file_from_folder_to_another(self, original_path, new_path):
+        # verify if both path exist if not raised an error
+        # if the file does not exist in the original path it raises an error
+        # if the file already exists in the new path it raises an error
+        # if the file is a directory it raises an error
+        # if the file is not a directory it raises an error
+        try:
+            shutil.move(original_path, new_path)
+        except FileNotFoundError:
+            print("The file san does not exist.")
+
     
