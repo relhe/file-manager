@@ -83,15 +83,21 @@ class FileManager:
             os.rmdir(self.path + dirname)
         except FileNotFoundError:
             print(f"The {dirname} directory does not exist.")
+        except OSError:
+            print("The directory is not empty.")
 
     def remove_directory(self, dirname):
         try:
             shutil.rmtree(self.path + dirname)
         except FileNotFoundError:
             print(f"The {dirname} directory does not exist.")
+        except NotADirectoryError:
+            print(f"The file is not a directory.")
 
     def move_to_another_directory(self, filename, new_path):
         # verify if the new_path exists if not it creates it + the file to be moved
+        if(not os.path.exists(new_path)):
+            os.makedirs(new_path)
         try:
             shutil.move(self.path + filename, new_path)
         except FileNotFoundError:
@@ -100,15 +106,16 @@ class FileManager:
             print("The file already exists.")
 
     def move_file_from_folder_to_another(self, original_path, new_path):
-        # verify if both path exist if not raised an error
-        # if the file does not exist in the original path it raises an error
-        # if the file already exists in the new path it raises an error
-        # if the file is a directory it raises an error
-        # if the file is not a directory it raises an error
         try:
+            if(not os.path.exists(original_path)):
+                raise FileNotFoundError
+            if(not os.path.exists(new_path)):
+                os.makedirs(new_path)
             shutil.move(original_path, new_path)
         except FileNotFoundError:
-            print("The file san does not exist.")
+            print("The file does not exist in this pathname")
+        except FileExistsError:
+            print("The file already exists in the new path last directory.")
 
     def rename_file_in_folder(self, original_name, new_name):
         try:
@@ -130,3 +137,17 @@ class FileManager:
             if pattern in filename and os.path.isfile(self.path + filename):
                 new_name = filename.replace(pattern, new_pattern)
                 self.rename_file_in_folder(filename, new_name)
+
+    def copy_file_to_another_directory(self, filename, new_path):
+        try:
+            shutil.copy(self.path + filename, new_path)
+        except FileNotFoundError:
+            print(f"The file {filename} does not exist.")
+        except FileExistsError:
+            print(f"The file {filename} already exists.")
+        except IsADirectoryError:
+            print(f"The file is a directory.")
+        except NotADirectoryError:
+            print(f"The file is not a directory.")
+        except OSError:
+            print(f"There already is a not empty {filename} folder.")
