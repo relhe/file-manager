@@ -11,24 +11,30 @@ class FileManager:
             self.path = "./"
 
     def get_files(self):
+        self.files = os.listdir(self.path)
         return self.files
 
     def list_all_files(self):
+        self.files = os.listdir(self.path)
         for filename in self.files:
             print(filename)
+        print("")
 
     def sort_all_files(self):
+        self.files = os.listdir(self.path)
         self.files.sort()
         for filename in self.files:
             print(filename)
 
     def reverse_sort_all_files(self):
+        self.files = os.listdir(self.path)
         self.files.sort()
         self.files.reverse()
         for filename in self.files:
             print(filename)
 
     def list_first_ten_files(self):
+        self.files = os.listdir(self.path)
         if len(self.files) > 10:
             files = self.files[0:10]
             for filename in files:
@@ -38,6 +44,7 @@ class FileManager:
                 print(filename)
 
     def list_last_ten_files(self):
+        self.files = os.listdir(self.path)
         if len(self.files) > 10:
             files = self.files[-10:]
             for filename in files:
@@ -48,18 +55,19 @@ class FileManager:
 
     def create_new_directory(self, dirname):
         try:
-            os.mkdir(self.path + "/" + dirname)
+            os.mkdir(self.path + dirname)
         except OSError:
             print(f"The {dirname} directory already exists.")
 
     def create_leaf_directory(self, dirname):
         try:
-            os.makedirs(self.path + "/" + dirname)
+            os.makedirs(self.path + dirname)
         except OSError:
             print(f"The {dirname} directory already exists.")
 
     def create_new_file(self, filename):
         try:
-            open(self.path + "/" + filename, "w")
+            open(self.path + filename, "w")
         except OSError:
             print("The file already exists.")
+
