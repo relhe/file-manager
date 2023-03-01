@@ -17,8 +17,7 @@ class FileManager:
     def list_all_files(self):
         self.files = os.listdir(self.path)
         for filename in self.files:
-            print(filename)
-        print("")
+            print(" " + filename)
 
     def sort_all_files(self):
         self.files = os.listdir(self.path)
@@ -111,4 +110,23 @@ class FileManager:
         except FileNotFoundError:
             print("The file san does not exist.")
 
-    
+    def rename_file_in_folder(self, original_name, new_name):
+        try:
+            os.rename(self.path + original_name, self.path + new_name)
+        except FileNotFoundError:
+            print(f"The file {original_name} does not exist.")
+        except FileExistsError:
+            print(f"The file {new_name} already exists.")
+        except IsADirectoryError:
+            print(f"The file is a directory.")
+        except NotADirectoryError:
+            print(f"The file is not a directory.")
+        except OSError:
+            print(f"There already is a not empty {new_name} folder.")
+
+    def modify_file_name_with_pattern(self, pattern, new_pattern = ""):
+        self.files = os.listdir(self.path)
+        for filename in self.files:
+            if pattern in filename and os.path.isfile(self.path + filename):
+                new_name = filename.replace(pattern, new_pattern)
+                self.rename_file_in_folder(filename, new_name)
