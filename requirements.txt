@@ -1,0 +1,4 @@
+this project need to have those installed:
+python version 3.10 or higher
+pip version 21.2.4 or higher
+pyttube version 10.4.1 or higher
