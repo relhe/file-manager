@@ -1,5 +1,5 @@
 import os
-import filemanager as fm
+import src.filemanager as fm
 
 if __name__ == "__main__":
     print("This program allows you to manage files in a directory.")

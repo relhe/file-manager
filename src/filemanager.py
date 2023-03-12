@@ -15,42 +15,30 @@ class FileManager:
         return self.files
 
     def list_all_files(self):
-        self.files = os.listdir(self.path)
-        for filename in self.files:
-            print(" " + filename)
+        return os.listdir(self.path)
 
     def sort_all_files(self):
         self.files = os.listdir(self.path)
         self.files.sort()
-        for filename in self.files:
-            print(filename)
+        return self.files
 
     def reverse_sort_all_files(self):
         self.files = os.listdir(self.path)
         self.files.sort()
         self.files.reverse()
-        for filename in self.files:
-            print(filename)
+        return self.files
 
     def list_first_ten_files(self):
         self.files = os.listdir(self.path)
         if len(self.files) > 10:
-            files = self.files[0:10]
-            for filename in files:
-                print(filename)
-        else:
-            for filename in self.files:
-                print(filename)
+            return self.files[0:10]
+        return self.files
 
     def list_last_ten_files(self):
         self.files = os.listdir(self.path)
         if len(self.files) > 10:
-            files = self.files[-10:]
-            for filename in files:
-                print(filename)
-        else:
-            for filename in self.files:
-                print(filename)
+            return self.files[-10:]
+        return self.files
 
     def create_new_directory(self, dirname):
         try:
@@ -66,7 +54,8 @@ class FileManager:
 
     def create_new_file(self, filename):
         try:
-            open(self.path + filename, "w")
+            fd = open(self.path + filename, "w")
+            fd.close()
         except OSError:
             print("The file already exists.")
 
@@ -76,7 +65,7 @@ class FileManager:
         except FileNotFoundError:
             print(f"The {filename} file does not exist.")
         except OSError:
-            print("The file is a directory.")
+            print("This is a directory.")
 
     def remove_empty_directory(self, dirname):
         try:
@@ -92,7 +81,7 @@ class FileManager:
         except FileNotFoundError:
             print(f"The {dirname} directory does not exist.")
         except NotADirectoryError:
-            print(f"The file is not a directory.")
+            print("This is not a directory.")
 
     def move_to_another_directory(self, filename, new_path):
         # verify if the new_path exists if not it creates it + the file to be moved
@@ -125,9 +114,9 @@ class FileManager:
         except FileExistsError:
             print(f"The file {new_name} already exists.")
         except IsADirectoryError:
-            print(f"The file is a directory.")
+            print("The file is a directory.")
         except NotADirectoryError:
-            print(f"The file is not a directory.")
+            print("The file is not a directory.")
         except OSError:
             print(f"There already is a not empty {new_name} folder.")
 
@@ -146,8 +135,8 @@ class FileManager:
         except FileExistsError:
             print(f"The file {filename} already exists.")
         except IsADirectoryError:
-            print(f"The file is a directory.")
+            print("The file is a directory.")
         except NotADirectoryError:
-            print(f"The file is not a directory.")
+            print("The file is not a directory.")
         except OSError:
-            print(f"There already is a not empty {filename} folder.")
+            print("There already is a not empty {filename} folder.")
